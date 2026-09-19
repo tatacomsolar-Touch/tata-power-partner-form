@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tata Power Solar - Channel Partner Application Form</title>
+    <style>
+        /* Tata Power Solar Official Brand Color Palette */
+        :root {
+            --tata-blue: #0056b3;
+            --tata-dark-blue: #003d82;
+            --solar-orange: #f57c00;
+            --solar-amber: #ffc107;
+            --bg-gray: #f8fafc;
+            --card-border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-main);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 750px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Top Header Card */
+        .header-card {
+            background: #ffffff;
+            border-top: 6px solid var(--tata-blue);
+            padding: 24px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .official-badge {
+            background-color: #eef6ff;
+            color: var(--tata-blue);
+            border: 1px solid #bce0fd;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .doc-title {
+            color: var(--text-main);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .doc-subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .highlight-banner {
+            background: linear-gradient(135deg, var(--tata-blue) 0%, var(--tata-dark-blue) 100%);
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .highlight-item {
+            flex: 1;
+        }
+
+        .highlight-item:not(:last-child) {
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .highlight-val {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--solar-amber);
+        }
+
+        .highlight-lbl {
+            font-size: 11px;
+            color: #e2e8f0;
+            text-transform: uppercase;
+        }
+
+        /* Section Cards */
+        .section-card {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--tata-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--bg-gray);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .req {
+            color: #e11d48;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            background-color: var(--bg-gray);
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--tata-blue);
+            background-color: #ffffff;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .option-label {
+            font-size: 13px;
+            font-weight: normal;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* Action Button */
+        .btn-container {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .btn-submit {
+            background-color: var(--solar-orange);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 12px 36px;
+            border: none;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(245, 124, 0, 0.3);
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #e06d00;
+        }
+
+        .footer-notice {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 0 24px 20px 24px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <!-- Header Section -->
+        <div class="header-card">
+            <div class="brand-header">
+                <img class="logo-svg"
+                    src="https://www.amplesolar.in/wp-content/uploads/2025/06/tata-solar-rooftop-gandhinagar-amplesolar.png"
+                    alt="Tata Power Solar" height="40">
+                <span class="official-badge">Official Application</span>
+            </div>
+
+            <div class="doc-title">Channel Partner Registration Form</div>
+            <div class="doc-subtitle">West Bengal Network Expansion Drive | Government Registered Franchise Program
+            </div>
+
+            <div class="highlight-banner">
+                <div class="highlight-item">
+                    <div class="highlight-val">0%</div>
+                    <div class="highlight-lbl">Down Payment</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-val">Up to 20%</div>
+                    <div class="highlight-lbl">Profit Margin</div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-val">100%</div>
+                    <div class="highlight-lbl">Brand Support</div>
+                </div>
+            </div>
+        </div>
+
+        <form>
+            <!-- Section 1: Personal & Business Contact -->
+            <div class="section-card">
+                <div class="section-title">1. Applicant Details</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name <span class="req">*</span></label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Primary Phone Number <span class="req">*</span></label>
+                        <input type="tel" placeholder="Enter 10-digit mobile number" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>WhatsApp Number <span class="req">*</span></label>
+                        <input type="tel" placeholder="Enter WhatsApp number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span class="req">*</span></label>
+                        <input type="email" placeholder="example@domain.com" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>District & Location in West Bengal <span class="req">*</span></label>
+                        <input type="text" placeholder="e.g. Purba Medinipur, Kolkata, Howrah" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Business & Background Profile -->
+            <div class="section-card">
+                <div class="section-title">2. Business Profile & Qualification</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Current Profession / Business Background <span class="req">*</span></label>
+                        <div class="option-group">
+                            <label class="option-label"><input type="checkbox"> Electrical / Technical Shop
+                                Owner</label>
+                            <label class="option-label"><input type="checkbox"> Certified / Experienced
+                                Electrician</label>
+                            <label class="option-label"><input type="checkbox"> Solar / Renewable Energy Sector</label>
+                            <label class="option-label"><input type="checkbox"> Engineering / Technical
+                                Background</label>
+                            <label class="option-label"><input type="checkbox"> Entrepreneur / Business Owner</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Do you own a shop/office in a main market area? <span class="req">*</span></label>
+                        <div class="option-group">
+                            <label class="option-label"><input type="radio" name="shop"> Yes, Commercial Shop/Office
+                                Owned</label>
+                            <label class="option-label"><input type="radio" name="shop"> Yes, Commercial Shop/Office
+                                Rented</label>
+                            <label class="option-label"><input type="radio" name="shop"> No, Operating
+                                Individually</label>
+                        </div>
+
+                        <label style="margin-top: 15px;">Years of Relevant Experience <span class="req">*</span></label>
+                        <select required>
+                            <option value="">Select Experience</option>
+                            <option value="0-2">0 - 2 Years</option>
+                            <option value="3-5">3 - 5 Years</option>
+                            <option value="5+">5+ Years</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Additional Details -->
+            <div class="section-card">
+                <div class="section-title">3. Additional Information</div>
+                <div class="form-group">
+                    <label>Additional Comments / Business Query</label>
+                    <textarea rows="3"
+                        placeholder="Mention any specific queries or detailed business plan..."></textarea>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="btn-container">
+                <button type="submit" class="btn-submit">Submit Application</button>
+            </div>
+        </form>
+
+        <div class="footer-notice">
+            <strong>Tata Power Solar Systems Limited</strong> • Official Channel Partner Onboarding Form<br />
+            Applications are processed in coordination with West Bengal regional representatives.
+        </div>
+
+    </div>
+
+</body>
+
+</html>
